@@ -1,4 +1,4 @@
-import game_lviv
+ import game_lviv
 
 pidvalna = game_lviv.Street("Pidvalna st.")
 pidvalna.set_description("A narrow street with a tram railway and a bus stop")
@@ -36,8 +36,7 @@ arsenalna.link_street(fedorova, "west")
 
 alcoholic = game_lviv.Enemy("Alcoholic")
 alcoholic.set_health(50)
-alcoholic.set_desciption(f"A nameless alcoholic with a bottle of horilka in his hands. \
-HP: {alcoholic.get_health()}")
+alcoholic.set_desciption(f"A nameless alcoholic with a bottle of horilka in his hands.")
 alcoholic.set_conversation("Heyy...Got any penny for an old man?")
 
 
@@ -45,8 +44,7 @@ ruska.set_character(alcoholic)
 
 bandit = game_lviv.Enemy("Bandit")
 bandit.set_health(75)
-bandit.set_desciption(f"Strong man, i'd better have something tough to get through him. \
-HP: {bandit.get_health()}")
+bandit.set_desciption(f"Strong man, i'd better have something tough to get through him.")
 bandit.set_conversation("Looking for problems mate?")
 
 stryiska.set_character(bandit)
@@ -118,6 +116,7 @@ while dead == False:
             inhabitant.greet()
     elif command == "fight":
         if isinstance(inhabitant, game_lviv.Enemy):
+            print()
             # Fight with the inhabitant, if there is one
             print("What will you fight with?")
             fight_with = input()
@@ -134,7 +133,13 @@ while dead == False:
                     # What happens if you win?
                     current_hp = inhabitant.get_health() - weapon.get_damage()
                     inhabitant.set_health(current_hp)
-                    print(current_hp)
+                    init_hp = 0
+                    if inhabitant.name == "Alcoholic":
+                        init_hp = 50
+                    else:
+                        init_hp = 75
+                    print("Enemy:" + str(current_hp) + f"/{init_hp}")
+                    print("Player: " + str(points))
                     if current_hp > 0:
                         points -= 1
                         if points == 0:
