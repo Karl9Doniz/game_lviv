@@ -1,4 +1,4 @@
- import game_lviv
+import game_lviv
 
 pidvalna = game_lviv.Street("Pidvalna st.")
 pidvalna.set_description("A narrow street with a tram railway and a bus stop")
@@ -106,7 +106,7 @@ while dead == False:
     if command in ["north", "south", "east", "west"]:
         # Move in the given direction
         current_street = current_street.move(command)
-        if current_street.get_name == "Kozelnytska st.":
+        if current_street.get_name == "Kozelnytska st." and bandit.get_health < 0:
             print("You're home! That was a hell of a night walk.")
             dead = True
 
@@ -170,6 +170,7 @@ while dead == False:
                 print("Got nothing to trade with now")
             elif inhabitant.name == "Sketchy guy" and entry == "Beer":
                 print("You put the " + inhabitant.get_trade_item().get_name() + " in your backpack")
+                print("Baseball bat, damage: " + str(inhabitant.get_trade_item().get_damage()))
                 backpack.append(inhabitant.get_trade_item().get_name())
                 inhabitant.set_trade_item(None)
             elif inhabitant.name == "Lost tourist" and entry == "Map":
